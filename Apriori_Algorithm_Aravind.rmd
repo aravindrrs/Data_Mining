@@ -1,0 +1,32 @@
+---
+title: "Apriori Algorithm"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,dev='pdf')
+```
+
+
+
+```{r apriori1}
+library(arules)
+alpha=read.transactions('C:/Users/tony stark/Desktop/data mining assignments/p5/alpha.txt',format='basket',sep=",")
+inspect(alpha)
+rules<-apriori(alpha,parameter=list(supp=0.6,conf=0.0))
+inspect(rules)
+```
+From the set of 18 rules listed above, we have items {E,K,O} with support of 0.6 in the last three rows of the association rules. This indicates that the frequent item set after all the iterations is {E,K,O} given the support thershold of 0.6. This also confims what we obtained manually for the Apriori algoritm.
+
+``` {r, fig.width = 4, fig.height = 4}
+image(alpha)
+itemFrequencyPlot(alpha,support=0.6)
+```
+
+
+
+
+
+
+
+
