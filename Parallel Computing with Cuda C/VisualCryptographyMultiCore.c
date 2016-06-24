@@ -18,21 +18,7 @@ static const level BlackShare2[2][2] = {1,1,0,0};
  
 void GenerateShareMC(level cColor, level share1[][2], level share2[][2], unsigned int r)
 {	
-// ************************************************************************************
-// DO NOT CHANGE ANYTHINNG BEFORE THIS POINT in YOUR CODE                             *
-// This is a function that randomly generates share pixels for each image pixel.      *                                                                                                  *
-// You do not need to use this function. But you can complete this function and call  *
-// it from PartialCodec for the processing of each image pixel.                      *
-// Four pixel sets for WHITE  and BLACK pixels are in array Share1[2][2] and          *
-// Share2[2][2]                                                                       *
-// ************************************************************************************
 
-// ************************************************************************************
-// Pixel geneates function ends here.                                                 *
-// Four pixel sets for WHITE  and BLACK pixels are in array Share1[2][2] and          *
-// Share2[2][2]                                                                       *
-// DO NOT CHANGE ANYTHINNG AFTER THIS POINT in YOUR CODE                              *
-// ************************************************************************************
 }
 
 void *PartialCodec(void *pcMCDataArg)
@@ -41,9 +27,7 @@ void *PartialCodec(void *pcMCDataArg)
 	MCData *pcMCData = (MCData *)pcMCDataArg;
 
 // ********************************************************************************
-// DO NOT CHANGE ANYTHING BEFORE THIS POINT in YOUR CODE                          *
-// Your thread function should go here.                                           *
-//   										  									  *
+
 // 1) If pcMCData->iCodecPath=ENCODE, the code performs encoding. In that case    *
 //    input image of size (iHeight x iWidth) pixels of (type level) is stored at  *
 //    address pcMCData->pImgData. The share images of size (2*iHeight x 2*iWidth) *
@@ -138,11 +122,7 @@ for (int y=pcMCData->iTd*(pcMCData->iHeight/pcMCData->iNumOfThreads);y<(pcMCData
   }
  }
 			  
-// ********************************************************************************
-// Your thread function code ends here.                                           *                                                      *
-// DO NOT CHANGE ANYTHING AFTER THIS POINT in YOUR CODE                           *
-// ********************************************************************************	
-	
+
 }
 
 void VCEncoderMC(ImageData *pcShare1, ImageData *pcShare2, ImageData *pcImageData, TimeRecord *pTR)
@@ -159,17 +139,10 @@ void VCEncoderMC(ImageData *pcShare1, ImageData *pcShare2, ImageData *pcImageDat
 	pcShare1->imgData = (level *)malloc(4 * pcImageData->iHeight * pcImageData->iWidth * sizeof(level));
 	pcShare2->imgData = (level *)malloc(4 * pcImageData->iHeight * pcImageData->iWidth * sizeof(level));
 
-// ********************************************************************************
-// DO NOT CHANGE ANYTHING BEFORE THIS POINT in YOUR CODE                          *
-// Number of threads goes in here.                                                *
-// ********************************************************************************
 
 	iNumOfThreads = 16;
 
-// ********************************************************************************
-// End Number of threads                              							  *
-// DO NOT CHANGE ANYTHING AFTER THIS POINT in YOUR CODE                           *
-// ********************************************************************************	
+
 	
 	if((pcImageData->iHeight % iNumOfThreads)!=0)
 	{
@@ -268,17 +241,9 @@ void VCDecoderMC(ImageData *pcShare1, ImageData *pcShare2, char *pInputImageName
 	sprintf(pcImageData->imageName, "ReconM_%s",pInputImageName);
 
 
-// ********************************************************************************
-// DO NOT CHANGE ANYTHING BEFORE THIS POINT in YOUR CODE                          *
-// Number of threads goes in here.                                                *
-// ********************************************************************************
 
 	iNumOfThreads = 16;
 
-// ********************************************************************************
-// End Number of threads                              							  *
-// DO NOT CHANGE ANYTHING AFTER THIS POINT in YOUR CODE                           *
-// ********************************************************************************	
 
 	pcPthread = (pthread_t *)malloc(sizeof(pthread_t)*iNumOfThreads);
 	pcMCData  = (MCData *)malloc(sizeof(MCData)*iNumOfThreads);
@@ -313,7 +278,7 @@ void VCDecoderMC(ImageData *pcShare1, ImageData *pcShare2, char *pInputImageName
 	}
 
 
-	//Wait all threads to finish
+	//Wait for all threads to finish
 	for(iTd=0;iTd < iNumOfThreads;iTd++)
 	{
 		pthread_join(pcPthread[iTd],NULL);
