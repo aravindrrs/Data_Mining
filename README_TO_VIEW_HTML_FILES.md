@@ -14,7 +14,5 @@ In order to view these html files :<br>
 
 <h3>Note</h3>
 The repository is just to showcase my projects using python. The codes are shown with their outputs and can be run in ipython notebook.<br>
-I request that it may be used as a reference for your work and not copied entirely! <br> 
-
 Projects are based on Data sets that I used. 
 
